@@ -17,7 +17,7 @@
       --border: #e2e8f0;
       --accent: #89c4ff; 
       --discord: #5865F2;
-      --accent-glow: rgba(137, 196, 255, 0.3);
+      --accent-glow: rgba(137, 196, 255, 0.4);
     }
 
     [data-theme="dark"] {
@@ -28,6 +28,7 @@
       --text-secondary: #94a3b8;
       --border: #334155;
       --accent: #a5d8ff;
+      --accent-glow: rgba(165, 216, 255, 0.3);
     }
 
     * { box-sizing: border-box; scroll-behavior: smooth; }
@@ -59,7 +60,7 @@
 
     /* --- HERO SECTION --- */
     .hero {
-      height: 80vh;
+      height: 85vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -84,6 +85,48 @@
       margin: 24px 0 40px;
     }
 
+    /* --- PULSING CTA ANIMATION --- */
+    .cta-wrapper {
+      position: relative;
+      display: inline-block;
+    }
+
+    .get-bot-btn {
+      position: relative;
+      background: var(--accent);
+      color: white;
+      text-decoration: none;
+      padding: 18px 42px;
+      border-radius: 16px;
+      font-weight: 700;
+      font-size: 18px;
+      z-index: 2;
+      display: block;
+      transition: transform 0.3s ease;
+      box-shadow: 0 10px 25px var(--accent-glow);
+    }
+
+    .get-bot-btn:hover {
+      transform: scale(1.05);
+      filter: brightness(1.05);
+    }
+
+    .pulse-halo {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      border-radius: 16px;
+      background: var(--accent);
+      z-index: 1;
+      animation: pulse-out 2.5s infinite;
+      opacity: 0;
+    }
+
+    @keyframes pulse-out {
+      0% { transform: scale(1); opacity: 0.6; }
+      70% { transform: scale(1.3, 1.6); opacity: 0; }
+      100% { transform: scale(1.3, 1.6); opacity: 0; }
+    }
+
     /* --- STATS SECTION --- */
     .stats-container {
       background: var(--surface);
@@ -101,11 +144,10 @@
     .stat-item h2 { font-size: 42px; margin: 0; color: var(--accent); }
     .stat-item p { margin: 5px 0 0; color: var(--text-secondary); font-weight: 500; font-size: 13px; text-transform: uppercase; }
 
-    /* --- COMMON SECTION STYLES --- */
+    /* --- FAQ SECTION --- */
     .section { padding: 80px 40px; max-width: 900px; margin: 0 auto; }
     .section-title { text-align: center; font-size: 32px; margin-bottom: 50px; }
 
-    /* --- FAQ SECTION --- */
     .faq-item {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -134,14 +176,10 @@
       font-size: 15px;
     }
 
-    .faq-item.active { border-color: var(--accent); box-shadow: 0 10px 25px var(--accent-glow); }
+    .faq-item.active { border-color: var(--accent); }
     .faq-item.active .faq-answer { max-height: 200px; padding-bottom: 24px; }
     
-    .chevron {
-      width: 20px; height: 20px;
-      fill: var(--text-secondary);
-      transition: transform 0.3s;
-    }
+    .chevron { width: 20px; height: 20px; fill: var(--text-secondary); transition: transform 0.3s; }
     .faq-item.active .chevron { transform: rotate(180deg); fill: var(--accent); }
 
     /* --- FOOTER PILL --- */
@@ -177,6 +215,11 @@
   <section class="hero">
     <h1 class="reveal">Better Tools.<br>Pastel Power.</h1>
     <p class="reveal">The ultimate utility suite for high-performance communities. Streamline your workflow with LabsUtility's intuitive automation.</p>
+    
+    <div class="cta-wrapper reveal">
+      <div class="pulse-halo"></div>
+      <a href="https://discord.com/oauth2/authorize..." class="get-bot-btn">Get LabsUtility</a>
+    </div>
   </section>
 
   <div class="stats-container reveal">
@@ -198,37 +241,16 @@
 
   <section class="section" id="faq">
     <h2 class="section-title reveal">Common Questions</h2>
-    
     <div class="faq-item reveal">
       <div class="faq-question">
         <span>How do I invite LabsUtility?</span>
         <svg class="chevron" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
       </div>
       <div class="faq-answer">
-        Simply click the "Add to Server" button in the hero section. You'll need "Manage Server" permissions to authorize the bot.
+        Simply click the "Get LabsUtility" button above. You'll need "Manage Server" permissions to authorize the bot.
       </div>
     </div>
-
-    <div class="faq-item reveal">
-      <div class="faq-question">
-        <span>Is the bot free to use?</span>
-        <svg class="chevron" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
-      </div>
-      <div class="faq-answer">
-        Yes! All core utility features are free. We offer a Supporter tier for those who want to help with hosting costs and unlock aesthetic perks.
-      </div>
-    </div>
-
-    <div class="faq-item reveal">
-      <div class="faq-question">
-        <span>Does it support custom themes?</span>
-        <svg class="chevron" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
-      </div>
-      <div class="faq-answer">
-        Absolutely. You can customize the embed colors and response styles to match your server's unique brand.
-      </div>
-    </div>
-  </section>
+    </section>
 
   <footer class="bottom-bar">
     <button class="theme-toggle" onclick="toggleTheme()">Change theme</button>
@@ -243,15 +265,10 @@
     }
     document.body.setAttribute('data-theme', localStorage.getItem('main-theme') || 'light');
 
-    // FAQ TOGGLE LOGIC
     document.querySelectorAll('.faq-question').forEach(q => {
-      q.addEventListener('click', () => {
-        const item = q.parentElement;
-        item.classList.toggle('active');
-      });
+      q.addEventListener('click', () => q.parentElement.classList.toggle('active'));
     });
 
-    // REVEAL OBSERVER
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
