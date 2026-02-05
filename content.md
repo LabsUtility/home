@@ -3,8 +3,9 @@
 ## **[CURRENT]** Update: Beta 1.6
 - Fixed Bugs
 - Rebuilt / Updated help command
+- New icon
+- 25 new gif commands
 ## Update: Beta 1.5
-This update includes the following changes:
 - 25 new interaction commands
 - Updated embed colors to a sleek solid grey
 - Made changes to the main bot genertive api server so it's faster
