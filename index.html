@@ -17,9 +17,9 @@
       --text-main: #2d3436;
       --text-secondary: #636e72;
       --border: #e2e8f0;
-      --accent: #89c4ff; /* Original Pastel Blue */
-      --discord: #5865F2; /* Original Discord Blurple */
-      --cta-dark: #3d5a80; /* The new darker, lower brightness blue for the CTA */
+      --accent: #89c4ff;
+      --discord: #5865F2;
+      --cta-dark: #3d5a80;
       --accent-glow: rgba(137, 196, 255, 0.4);
     }
 
@@ -45,7 +45,6 @@
       line-height: 1.6;
     }
 
-    /* --- NAVIGATION --- */
     .nav {
       position: fixed;
       top: 0; width: 100%; height: 80px; z-index: 1000;
@@ -61,7 +60,6 @@
     .nav-links a { text-decoration: none; color: var(--text-secondary); font-weight: 500; font-size: 15px; }
     .nav-links a:hover { color: var(--accent); }
 
-    /* --- HERO SECTION --- */
     .hero {
       height: 85vh;
       display: flex;
@@ -88,12 +86,11 @@
       margin: 24px 0 40px;
     }
 
-    /* --- SPECIFIC DARKER CTA --- */
     .cta-wrapper { position: relative; display: inline-block; }
 
     .get-bot-btn {
       position: relative;
-      background: var(--cta-dark); /* Applied specifically here */
+      background: var(--cta-dark);
       color: white;
       text-decoration: none;
       padding: 18px 42px;
@@ -127,7 +124,6 @@
       100% { transform: scale(1.3, 1.6); opacity: 0; }
     }
 
-    /* --- STATS SECTION --- */
     .stats-container {
       background: var(--surface);
       border-top: 1px solid var(--border);
@@ -144,7 +140,6 @@
     .stat-item h2 { font-size: 42px; margin: 0; color: var(--accent); }
     .stat-item p { margin: 5px 0 0; color: var(--text-secondary); font-weight: 500; font-size: 13px; text-transform: uppercase; }
 
-    /* --- FAQ SECTION --- */
     .section { padding: 80px 40px; max-width: 900px; margin: 0 auto; }
     .section-title { text-align: center; font-size: 32px; margin-bottom: 50px; }
 
@@ -182,7 +177,6 @@
     .chevron { width: 20px; height: 20px; fill: var(--text-secondary); transition: transform 0.3s; }
     .faq-item.active .chevron { transform: rotate(180deg); fill: var(--accent); }
 
-    /* --- FOOTER PILL --- */
     .bottom-bar {
       position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
       background: var(--surface); border: 1px solid var(--border);
@@ -225,15 +219,15 @@
   <div class="stats-container reveal">
     <div class="stats-grid">
       <div class="stat-item">
-        <h2 class="counter" data-target="4">0</h2>
+        <h2 class="counter" data-target="17">0</h2>
         <p>Active Servers</p>
       </div>
       <div class="stat-item">
-        <h2 class="counter" data-target="1.2">0</h2>
+        <h2 class="counter" data-target="5.2">0</h2>
         <p>Total Users (k)</p>
       </div>
       <div class="stat-item">
-        <h2 class="counter" data-target="96">0</h2>
+        <h2 class="counter" data-target="98">0</h2>
         <p>Uptime %</p>
       </div>
     </div>
